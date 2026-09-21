@@ -1,0 +1,174 @@
+---
+description: Design system e identidade visual do site Daniel From Zero. Tem precedência sobre vibeux.mdc em qualquer conflito.
+alwaysApply: true
+---
+
+# Precedence
+
+Este arquivo **sobrescreve** `.cursor/rules/vibeux.mdc` em qualquer conflito
+(cores, tipografia, dark/light, gradientes, tom de voz, componentes).
+O VibeUX só se aplica quando não houver conflito com estas regras
+(ex.: acessibilidade, hierarquia de botões, estados vazios).
+
+---
+
+# Skill: Design de Sites Distintos — Daniel Peixoto, Do Zero
+
+Identidade visual do site "Daniel From Zero" (hub de ferramentas + blog + jornada empreendedora).
+
+---
+
+## 1. Postura
+
+Aja como o design lead de um estúdio conhecido por dar identidade visual própria a cada
+projeto — nunca templates genéricos. Este cliente já rejeitou propostas "de IA genérica"
+(fundo creme + serif + terracota; preto puro + verde-ácido; cards SaaS todos iguais com
+sombra cinza; eyebrows em CAPS; setas "→" em todo botão). Evite ativamente esses defaults
+a menos que o brief peça exatamente isso.
+
+Antes de gerar qualquer componente ou página, pergunte internamente:
+- Isso parece "o que qualquer IA geraria para esse tipo de brief"?
+- Estou usando o conteúdo real do canal (ferramentas, jornada, erros/acertos) ou só
+  placeholder genérico tipo "Lorem ipsum" / "Feature 1, Feature 2, Feature 3"?
+
+## 2. Contexto de marca (fixo — não mude sem pedido explícito)
+
+- **Produto:** hub do canal/jornada empreendedora de Daniel Peixoto (programador,
+  empreendedor em construção). Ferramentas gratuitas (ex: calculadora de preço para
+  impressão 3D), blog, registro público de acertos e erros.
+- **Tom de voz:** honesto, direto, sem hype de guru. Fala de dentro do processo, não de
+  cima. CTAs descrevem exatamente o que acontece ("Testar a calculadora", nunca
+  "Descubra o segredo").
+- **Identidade visual de origem:** logo em traço desenhado à mão (line art), círculo com
+  padrão espiral concêntrico, alto contraste preto/off-white.
+- **YouTube:** https://www.youtube.com/@DanielFromZero
+
+## 3. Design tokens (usar sempre via CSS variables)
+
+```css
+:root {
+  /* cores */
+  --color-bg: #0D0D0C;
+  --color-bg-elevated: #171716;
+  --color-ink: #F2EEE3;
+  --color-ink-muted: #B8B3A6;
+  --color-border: #2E2C27;
+  --color-accent: #E8B04B;
+  --color-accent-hover: #F5C567;
+  --color-success: #6FBF73;
+  --color-danger: #E2624B;
+
+  /* tipografia */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+}
+```
+
+Regras de uso:
+- Preto e off-white sempre em alto contraste. Nunca cinza médio como fundo principal.
+- `--color-accent` (âmbar) só para ação/destaque (CTA, link, resultado de cálculo,
+  número em foco). Nunca como cor de bloco grande ou fundo de seção.
+- Dados técnicos, preços, números de calculadora, código → sempre `--font-mono`.
+  Reforça o lado "programador" da marca.
+- Dark mode é o padrão. Light mode (se necessário para leitura longa de blog) usa
+  `--color-bg-light: #F2EEE3` / `--color-ink-light: #0D0D0C`, mantendo o mesmo accent.
+
+## 4. Tipografia — escala e regras
+
+| Uso            | Tamanho  | Peso      | Fonte    |
+|----------------|----------|-----------|----------|
+| Display        | 3.5rem   | bold      | display  |
+| H1             | 2.5rem   | bold      | display  |
+| H2             | 1.75rem  | bold      | display  |
+| H3             | 1.25rem  | semibold  | display  |
+| Body           | 1rem     | regular   | body     |
+| Small          | 0.875rem | regular   | body     |
+| Mono (dados)   | 0.9375rem| medium    | mono     |
+
+- Line-height do corpo: 1.6. Letter-spacing negativo (-0.02em) só em títulos grandes.
+- Linhas de texto com menos de 80 caracteres de largura.
+- **Nunca** use: destaque de uma única palavra no título com cor/itálico diferente;
+  labels todo em CAPS; "eyebrows" (rótulo pequeno acima de todo bloco) sem função real;
+  numeração 01/02/03 quando o conteúdo não é sequência real.
+
+## 5. Espaçamento e layout
+
+- Escala de 4px: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128.
+- Container: `max-width: 1200px`, padding lateral 24px mobile / 48px desktop.
+- Border-radius: 12px em cards/botões, 999px em pills/tags (referência ao círculo do logo).
+- Grid de cards: 1 coluna mobile, 2 tablet, 3 desktop, gap 24px.
+- Mobile-first. Breakpoints: 640px, 768px, 1024px, 1280px.
+
+## 6. Componentes de referência
+
+**Botão primário:** fundo `--color-accent`, texto `#171512`, radius 12px, padding
+`12px 24px`, hover escurece + `translateY(-1px)`.
+
+**Botão secundário:** transparente, borda 1.5px `--color-border`, hover borda vira
+`--color-accent`.
+
+**Botão ghost/link:** sem fundo, cor `--color-accent`, sublinhado só no hover.
+
+**Card:** fundo `--color-bg-elevated`, borda 1px `--color-border`, radius 16px, padding
+24px. Hover: borda vira `--color-accent` + leve `translateY(-2px)`, transição 200ms.
+Tag de categoria no topo do card (pill, mono, 0.6875rem).
+
+**Input (formulários/calculadoras):** fundo `--color-bg`, borda 1px `--color-border`,
+radius 10px. Focus: borda `--color-accent` + outline sutil (2px, 30% opacidade).
+Resultado de cálculo sempre em destaque: fonte mono, tamanho h2, cor `--color-accent`.
+
+**Navbar:** fundo `--color-bg` com leve blur ao scroll, logo circular pequeno (~36-40px)
+à esquerda, nav links em mono, CTA principal à direita.
+
+## 7. Elemento gráfico assinatura
+
+Use o motivo de círculos concêntricos/espiral do logo como elemento decorativo recorrente
+— nunca como imagem grande e óbvia, sempre como camada sutil (stroke fino, baixa opacidade,
+`--color-border` ou `--color-accent` em ~5-8% de opacidade) atrás de seções-chave (hero,
+CTA final). Nunca deixe esse elemento competir com o texto ou reduzir a legibilidade.
+
+Se for gerar ícones customizados: traço fino, levemente imperfeito, hachuras diagonais
+para sombra, paleta reduzida a preto/creme/âmbar — seguindo o estilo "desenhado à mão"
+do logo. Ícones de UI padrão (não ilustrativos) usam um set line-based simples e
+consistente (Lucide/Feather), stroke-width 1.5-2, sem preenchimento.
+
+## 8. Microcopy
+
+- Nunca usar vocabulário de guru: "domine", "método infalível", "do zero ao milhão",
+  "descubra o segredo".
+- Usar linguagem de processo real: "o que eu testei", "isso não deu certo", "resultado
+  até agora", "ferramenta que eu uso no meu próprio processo".
+- CTA = verbo de ação que descreve exatamente o resultado do clique. Se o botão diz
+  "Publicar", o toast de confirmação diz "Publicado" — nunca troque o vocabulário no
+  meio do fluxo.
+- Estados vazios e erros: tom direto, explica o que aconteceu e como resolver, sem
+  personificação nem pedido de desculpas.
+
+## 9. Movimento
+
+Use animação de forma esparsa e deliberada. Prefira um único momento orquestrado
+(ex: entrada do hero) a fade-in genérico em cada seção/hover em cada card — isso é o
+padrão mais "gerado por IA" que existe. Motion que responde a uma ação do usuário
+(abrir, expandir, confirmar) é sempre bem-vinda.
+
+## 10. Acessibilidade e qualidade mínima
+
+- Contraste mínimo AA em todo texto (a paleta acima já garante isso).
+- `:focus-visible` sempre visível, outline em `--color-accent`.
+- Responsivo até mobile pequeno; respeitar `prefers-reduced-motion`.
+- Antes de finalizar, revise o próprio trabalho: existe algum elemento que pode ser
+  removido sem perda? Gaste a ousadia em um único ponto memorável por página; o resto
+  fica quieto e disciplinado.
+
+## 11. Processo (siga nessa ordem)
+
+1. Antes de codar, escreva um plano curto: paleta (reaproveitando os tokens acima ou
+   justificando um ajuste pontual), tipografia, um wireframe ASCII do layout, e o que
+   torna aquela página específica (não genérica).
+2. Revise o plano contra este documento — se algo parece "resposta padrão para qualquer
+   brief parecido", ajuste antes de codar.
+3. Implemente com CSS variables (nunca hardcode cores/fontes soltas no meio do código).
+4. Ao final, faça uma autocrítica rápida: o conteúdo é real (do canal, das ferramentas,
+   do tom de voz) ou placeholder? O motivo espiral está sutil ou está gritando? O CTA
+   descreve a ação real?
