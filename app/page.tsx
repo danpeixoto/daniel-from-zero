@@ -102,26 +102,25 @@ export default function HomePage() {
               Episódios e atualizações da jornada. Abre o canal em uma nova aba.
             </p>
           </Card>
-          <Card href="/blog" tag="no ar">
+          <Card href="/blog" tag="artigos">
             <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold sm:text-xl">
               Blog
             </h3>
             <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
-              Textos sobre o que testei, o que não deu certo e o resultado até
-              agora — incluindo como precificar impressão 3D.
+              Conteúdo prático sobre o que estou testando — o que funciona, o
+              que não funciona e o que vale aplicar.
             </p>
           </Card>
           <Card
             href="/ferramentas"
-            tag="no ar"
+            tag="gratuitas"
             className="sm:col-span-2 lg:col-span-1"
           >
             <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold sm:text-xl">
               Ferramentas
             </h3>
             <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
-              Utilitários gratuitos para mim e para quem acompanha. A primeira
-              ferramenta — calculadora de preço de impressão 3D — já está no ar.
+              Para resolver problemas reais do dia a dia.
             </p>
           </Card>
         </div>
