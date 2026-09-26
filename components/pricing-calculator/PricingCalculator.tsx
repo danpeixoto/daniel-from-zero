@@ -13,6 +13,7 @@ import { AdvancedSettings } from "./AdvancedSettings";
 import { FilamentSection } from "./FilamentSection";
 import { LaborSection } from "./LaborSection";
 import { MarginSection } from "./MarginSection";
+import { PackagingSection } from "./PackagingSection";
 import { PricingSummary } from "./PricingSummary";
 import { PrinterSection } from "./PrinterSection";
 import { ProductionSection } from "./ProductionSection";
@@ -26,6 +27,7 @@ function mergeStoredInput(parsed: Partial<PricingInput>): PricingInput {
     printing: { ...defaults.printing, ...parsed.printing },
     labor: { ...defaults.labor, ...parsed.labor },
     fees: { ...defaults.fees, ...parsed.fees },
+    packaging: { ...defaults.packaging, ...parsed.packaging },
     additionalCosts: Array.isArray(parsed.additionalCosts)
       ? parsed.additionalCosts
       : defaults.additionalCosts,
@@ -68,17 +70,22 @@ export function PricingCalculator() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-wrap items-center gap-3">
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={() => setInput((v) => applyBeginnerPreset(v))}
-        >
-          Perfil iniciante
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-3">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => setInput((v) => applyBeginnerPreset(v))}
+          >
+            Perfil iniciante
+          </Button>
+          <p className="text-[0.8125rem] text-[var(--color-ink-muted)]">
+            Aplica desperdício 10%, máquina R$ 1,50/h e margem 40%.
+          </p>
+        </div>
+        <Button type="button" variant="ghost" onClick={clearAll}>
+          Limpar todos os campos
         </Button>
-        <p className="text-[0.8125rem] text-[var(--color-ink-muted)]">
-          Aplica desperdício 10%, máquina R$ 1,50/h e margem 40%.
-        </p>
       </div>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[minmax(0,1fr)_400px]">
@@ -87,6 +94,7 @@ export function PricingCalculator() {
           <FilamentSection value={input} onChange={setInput} />
           <PrinterSection value={input} onChange={setInput} />
           <LaborSection value={input} onChange={setInput} />
+          <PackagingSection value={input} onChange={setInput} />
           <MarginSection value={input} onChange={setInput} />
           <AdvancedSettings value={input} onChange={setInput} />
         </div>

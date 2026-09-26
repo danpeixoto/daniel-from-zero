@@ -1,15 +1,11 @@
 import type { PricingInput } from "@/lib/pricing";
-import { Field, inputClassName } from "./Field";
+import { Field } from "./Field";
+import { DecimalInput } from "./NumericInput";
 
 type Props = {
   value: PricingInput;
   onChange: (next: PricingInput) => void;
 };
-
-function parseNum(raw: string): number {
-  const v = Number(raw.replace(",", "."));
-  return Number.isFinite(v) ? v : 0;
-}
 
 export function MarginSection({ value, onChange }: Props) {
   return (
@@ -30,21 +26,13 @@ export function MarginSection({ value, onChange }: Props) {
             </>
           }
         >
-          <input
+          <DecimalInput
             id="desired-margin"
-            type="number"
-            inputMode="decimal"
             min={0}
             max={99}
-            step={1}
+            maxFractionDigits={2}
             value={value.desiredMargin}
-            onChange={(e) =>
-              onChange({
-                ...value,
-                desiredMargin: Math.max(0, parseNum(e.target.value)),
-              })
-            }
-            className={inputClassName}
+            onChange={(desiredMargin) => onChange({ ...value, desiredMargin })}
           />
         </Field>
       </div>

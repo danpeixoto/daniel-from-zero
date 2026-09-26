@@ -37,6 +37,7 @@ export function PricingSummary({ input, result, onClear }: Props) {
     { label: "Energia", value: costs.electricity },
     { label: "Máquina", value: costs.machine },
     { label: "Mão de obra", value: costs.labor },
+    { label: "Embalagem", value: costs.packaging },
     { label: "Outros", value: costs.additional },
   ];
   const subtotalBase = costs.subtotal > 0 ? costs.subtotal : 0;
@@ -131,7 +132,8 @@ export function PricingSummary({ input, result, onClear }: Props) {
                 ["Energia", costs.electricity],
                 ["Uso da máquina", costs.machine],
                 ["Mão de obra", costs.labor],
-                ["Custos adicionais", costs.additional],
+                ["Embalagem", costs.packaging],
+                ["Outros custos", costs.additional],
               ] as const
             ).map(([label, value]) => (
               <div key={label} className="flex justify-between gap-4">

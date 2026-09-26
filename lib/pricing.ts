@@ -33,6 +33,10 @@ export type PricingInput = {
     payment: number;
   };
   desiredMargin: number;
+  packaging: {
+    value: number;
+    type: "unit" | "total";
+  };
   additionalCosts: AdditionalCost[];
 };
 
@@ -46,6 +50,7 @@ export type PricingResult = {
     electricity: number;
     machine: number;
     labor: number;
+    packaging: number;
     additional: number;
     subtotal: number;
     wasteAmount: number;
@@ -92,6 +97,7 @@ export function createDefaultInput(): PricingInput {
     wastePercentage: 10,
     fees: { tax: 0, marketplace: 0, payment: 0 },
     desiredMargin: 40,
+    packaging: { value: 0, type: "unit" },
     additionalCosts: [],
   };
 }
@@ -129,12 +135,18 @@ export function calculatePricing(input: PricingInput): PricingResult {
     n(input.printing.electricityPrice);
   const machine = printHours * n(input.printing.machineHourlyCost);
   const labor = laborHours * n(input.labor.hourlyRate);
-  const additional = input.additionalCosts.reduce((sum, item) => {
+  const packagingValue = n(input.packaging?.value);
+  const packaging =
+    (input.packaging?.type ?? "unit") === "unit"
+      ? packagingValue * quantity
+      : packagingValue;
+  const additional = (input.additionalCosts ?? []).reduce((sum, item) => {
     const value = n(item.value);
     return sum + (item.type === "unit" ? value * quantity : value);
   }, 0);
 
-  const subtotal = filament + electricity + machine + labor + additional;
+  const subtotal =
+    filament + electricity + machine + labor + packaging + additional;
   const wastePct = n(input.wastePercentage) / 100;
   const total = subtotal * (1 + wastePct);
   const wasteAmount = total - subtotal;
@@ -167,6 +179,7 @@ export function calculatePricing(input: PricingInput): PricingResult {
       electricity,
       machine,
       labor,
+      packaging,
       additional,
       subtotal,
       wasteAmount,
@@ -251,7 +264,6 @@ export const BENCHMARK_INPUT: PricingInput = {
   wastePercentage: 10,
   fees: { tax: 0, marketplace: 0, payment: 0 },
   desiredMargin: 40,
-  additionalCosts: [
-    { id: "bench-1", name: "Corrente", value: 0.5, type: "unit" },
-  ],
+  packaging: { value: 0.5, type: "unit" },
+  additionalCosts: [],
 };

@@ -1,16 +1,12 @@
 import type { PricingInput } from "@/lib/pricing";
 import { AdditionalCostsList } from "./AdditionalCostsList";
-import { Field, inputClassName } from "./Field";
+import { Field } from "./Field";
+import { DecimalInput } from "./NumericInput";
 
 type Props = {
   value: PricingInput;
   onChange: (next: PricingInput) => void;
 };
-
-function parseNum(raw: string): number {
-  const v = Number(raw.replace(",", "."));
-  return Number.isFinite(v) ? v : 0;
-}
 
 export function AdvancedSettings({ value, onChange }: Props) {
   return (
@@ -25,23 +21,17 @@ export function AdvancedSettings({ value, onChange }: Props) {
           hint="Se não souber, comece entre R$ 1,00 e R$ 2,00 por hora."
           tooltip="Esse valor representa desgaste, manutenção e depreciação da impressora. Ele é diferente do custo de energia."
         >
-          <input
+          <DecimalInput
             id="machine-hourly-cost"
-            type="number"
-            inputMode="decimal"
             min={0}
-            step={0.01}
+            maxFractionDigits={2}
             value={value.printing.machineHourlyCost}
-            onChange={(e) =>
+            onChange={(machineHourlyCost) =>
               onChange({
                 ...value,
-                printing: {
-                  ...value.printing,
-                  machineHourlyCost: Math.max(0, parseNum(e.target.value)),
-                },
+                printing: { ...value.printing, machineHourlyCost },
               })
             }
-            className={inputClassName}
           />
         </Field>
 
@@ -53,20 +43,14 @@ export function AdvancedSettings({ value, onChange }: Props) {
           hint="Padrão sugerido: 10%."
           tooltip="Compensa falhas, retrabalho, sobras de filamento e peças que não saem boas. Aplica um percentual sobre o subtotal dos custos."
         >
-          <input
+          <DecimalInput
             id="waste-percentage"
-            type="number"
-            inputMode="decimal"
             min={0}
-            step={1}
+            maxFractionDigits={2}
             value={value.wastePercentage}
-            onChange={(e) =>
-              onChange({
-                ...value,
-                wastePercentage: Math.max(0, parseNum(e.target.value)),
-              })
+            onChange={(wastePercentage) =>
+              onChange({ ...value, wastePercentage })
             }
-            className={inputClassName}
           />
         </Field>
 
@@ -87,23 +71,14 @@ export function AdvancedSettings({ value, onChange }: Props) {
             label="Impostos (%)"
             tooltip="Percentual de impostos sobre o preço de venda (ex.: Simples, ISS). Use 0 se não se aplicar."
           >
-            <input
+            <DecimalInput
               id="fee-tax"
-              type="number"
-              inputMode="decimal"
               min={0}
-              step={0.1}
+              maxFractionDigits={2}
               value={value.fees.tax}
-              onChange={(e) =>
-                onChange({
-                  ...value,
-                  fees: {
-                    ...value.fees,
-                    tax: Math.max(0, parseNum(e.target.value)),
-                  },
-                })
+              onChange={(tax) =>
+                onChange({ ...value, fees: { ...value.fees, tax } })
               }
-              className={inputClassName}
             />
           </Field>
 
@@ -112,23 +87,14 @@ export function AdvancedSettings({ value, onChange }: Props) {
             label="Taxa marketplace (%)"
             tooltip="Comissão de plataformas como Mercado Livre, Shopee ou similar sobre o preço de venda."
           >
-            <input
+            <DecimalInput
               id="fee-marketplace"
-              type="number"
-              inputMode="decimal"
               min={0}
-              step={0.1}
+              maxFractionDigits={2}
               value={value.fees.marketplace}
-              onChange={(e) =>
-                onChange({
-                  ...value,
-                  fees: {
-                    ...value.fees,
-                    marketplace: Math.max(0, parseNum(e.target.value)),
-                  },
-                })
+              onChange={(marketplace) =>
+                onChange({ ...value, fees: { ...value.fees, marketplace } })
               }
-              className={inputClassName}
             />
           </Field>
 
@@ -137,23 +103,14 @@ export function AdvancedSettings({ value, onChange }: Props) {
             label="Taxa de pagamento (%)"
             tooltip="Taxa de cartão, Pix intermediado ou gateway de pagamento sobre o valor da venda."
           >
-            <input
+            <DecimalInput
               id="fee-payment"
-              type="number"
-              inputMode="decimal"
               min={0}
-              step={0.1}
+              maxFractionDigits={2}
               value={value.fees.payment}
-              onChange={(e) =>
-                onChange({
-                  ...value,
-                  fees: {
-                    ...value.fees,
-                    payment: Math.max(0, parseNum(e.target.value)),
-                  },
-                })
+              onChange={(payment) =>
+                onChange({ ...value, fees: { ...value.fees, payment } })
               }
-              className={inputClassName}
             />
           </Field>
         </div>

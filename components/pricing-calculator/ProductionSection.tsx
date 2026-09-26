@@ -1,15 +1,11 @@
 import type { PricingInput } from "@/lib/pricing";
-import { Field, inputClassName } from "./Field";
+import { Field } from "./Field";
+import { IntegerInput } from "./NumericInput";
 
 type Props = {
   value: PricingInput;
   onChange: (next: PricingInput) => void;
 };
-
-function parseNum(raw: string): number {
-  const v = Number(raw.replace(",", "."));
-  return Number.isFinite(v) ? v : 0;
-}
 
 export function ProductionSection({ value, onChange }: Props) {
   return (
@@ -23,20 +19,11 @@ export function ProductionSection({ value, onChange }: Props) {
           label="Quantidade"
           tooltip="Quantas unidades serão produzidas neste pedido."
         >
-          <input
+          <IntegerInput
             id="quantity"
-            type="number"
-            inputMode="numeric"
             min={1}
-            step={1}
             value={value.quantity}
-            onChange={(e) =>
-              onChange({
-                ...value,
-                quantity: Math.max(1, Math.floor(parseNum(e.target.value)) || 1),
-              })
-            }
-            className={inputClassName}
+            onChange={(quantity) => onChange({ ...value, quantity })}
           />
         </Field>
 
@@ -46,47 +33,30 @@ export function ProductionSection({ value, onChange }: Props) {
           </p>
           <div className="grid grid-cols-2 gap-3">
             <Field id="print-hours" label="Horas">
-              <input
+              <IntegerInput
                 id="print-hours"
-                type="number"
-                inputMode="numeric"
                 min={0}
-                step={1}
                 value={value.printing.hours}
-                onChange={(e) =>
+                onChange={(hours) =>
                   onChange({
                     ...value,
-                    printing: {
-                      ...value.printing,
-                      hours: Math.max(0, Math.floor(parseNum(e.target.value))),
-                    },
+                    printing: { ...value.printing, hours },
                   })
                 }
-                className={inputClassName}
               />
             </Field>
             <Field id="print-minutes" label="Minutos">
-              <input
+              <IntegerInput
                 id="print-minutes"
-                type="number"
-                inputMode="numeric"
                 min={0}
                 max={59}
-                step={1}
                 value={value.printing.minutes}
-                onChange={(e) =>
+                onChange={(minutes) =>
                   onChange({
                     ...value,
-                    printing: {
-                      ...value.printing,
-                      minutes: Math.max(
-                        0,
-                        Math.min(59, Math.floor(parseNum(e.target.value))),
-                      ),
-                    },
+                    printing: { ...value.printing, minutes },
                   })
                 }
-                className={inputClassName}
               />
             </Field>
           </div>

@@ -1,15 +1,11 @@
 import type { PricingInput } from "@/lib/pricing";
-import { Field, inputClassName } from "./Field";
+import { Field } from "./Field";
+import { DecimalInput, IntegerInput } from "./NumericInput";
 
 type Props = {
   value: PricingInput;
   onChange: (next: PricingInput) => void;
 };
-
-function parseNum(raw: string): number {
-  const v = Number(raw.replace(",", "."));
-  return Number.isFinite(v) ? v : 0;
-}
 
 export function LaborSection({ value, onChange }: Props) {
   return (
@@ -27,47 +23,30 @@ export function LaborSection({ value, onChange }: Props) {
           </p>
           <div className="grid grid-cols-2 gap-3">
             <Field id="labor-hours" label="Horas">
-              <input
+              <IntegerInput
                 id="labor-hours"
-                type="number"
-                inputMode="numeric"
                 min={0}
-                step={1}
                 value={value.labor.hours}
-                onChange={(e) =>
+                onChange={(hours) =>
                   onChange({
                     ...value,
-                    labor: {
-                      ...value.labor,
-                      hours: Math.max(0, Math.floor(parseNum(e.target.value))),
-                    },
+                    labor: { ...value.labor, hours },
                   })
                 }
-                className={inputClassName}
               />
             </Field>
             <Field id="labor-minutes" label="Minutos">
-              <input
+              <IntegerInput
                 id="labor-minutes"
-                type="number"
-                inputMode="numeric"
                 min={0}
                 max={59}
-                step={1}
                 value={value.labor.minutes}
-                onChange={(e) =>
+                onChange={(minutes) =>
                   onChange({
                     ...value,
-                    labor: {
-                      ...value.labor,
-                      minutes: Math.max(
-                        0,
-                        Math.min(59, Math.floor(parseNum(e.target.value))),
-                      ),
-                    },
+                    labor: { ...value.labor, minutes },
                   })
                 }
-                className={inputClassName}
               />
             </Field>
           </div>
@@ -81,23 +60,17 @@ export function LaborSection({ value, onChange }: Props) {
           label="Valor da sua hora (R$)"
           tooltip="Quanto você considera valer uma hora do seu trabalho neste pedido."
         >
-          <input
+          <DecimalInput
             id="hourly-rate"
-            type="number"
-            inputMode="decimal"
             min={0}
-            step={0.01}
+            maxFractionDigits={2}
             value={value.labor.hourlyRate}
-            onChange={(e) =>
+            onChange={(hourlyRate) =>
               onChange({
                 ...value,
-                labor: {
-                  ...value.labor,
-                  hourlyRate: Math.max(0, parseNum(e.target.value)),
-                },
+                labor: { ...value.labor, hourlyRate },
               })
             }
-            className={inputClassName}
           />
         </Field>
       </div>

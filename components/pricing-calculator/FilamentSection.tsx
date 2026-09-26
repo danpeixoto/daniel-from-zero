@@ -1,16 +1,12 @@
 import type { PricingInput } from "@/lib/pricing";
 import { formatBRL } from "@/lib/format";
-import { Field, inputClassName } from "./Field";
+import { Field } from "./Field";
+import { DecimalInput } from "./NumericInput";
 
 type Props = {
   value: PricingInput;
   onChange: (next: PricingInput) => void;
 };
-
-function parseNum(raw: string): number {
-  const v = Number(raw.replace(",", "."));
-  return Number.isFinite(v) ? v : 0;
-}
 
 export function FilamentSection({ value, onChange }: Props) {
   const { spoolPrice, spoolWeight, usedWeight } = value.filament;
@@ -24,23 +20,17 @@ export function FilamentSection({ value, onChange }: Props) {
       </h2>
       <div className="mt-6 flex flex-col gap-5">
         <Field id="spool-price" label="Preço do rolo (R$)">
-          <input
+          <DecimalInput
             id="spool-price"
-            type="number"
-            inputMode="decimal"
             min={0}
-            step={0.01}
+            maxFractionDigits={2}
             value={spoolPrice}
-            onChange={(e) =>
+            onChange={(next) =>
               onChange({
                 ...value,
-                filament: {
-                  ...value.filament,
-                  spoolPrice: Math.max(0, parseNum(e.target.value)),
-                },
+                filament: { ...value.filament, spoolPrice: next },
               })
             }
-            className={inputClassName}
           />
         </Field>
 
@@ -54,23 +44,18 @@ export function FilamentSection({ value, onChange }: Props) {
               : undefined
           }
         >
-          <input
+          <DecimalInput
             id="spool-weight"
-            type="number"
-            inputMode="decimal"
             min={0}
-            step={1}
+            maxFractionDigits={1}
             value={spoolWeight}
-            onChange={(e) =>
+            onChange={(next) =>
               onChange({
                 ...value,
-                filament: {
-                  ...value.filament,
-                  spoolWeight: Math.max(0, parseNum(e.target.value)),
-                },
+                filament: { ...value.filament, spoolWeight: next },
               })
             }
-            className={inputClassName}
+            aria-invalid={spoolWeight <= 0}
           />
         </Field>
 
@@ -79,23 +64,17 @@ export function FilamentSection({ value, onChange }: Props) {
           label="Filamento usado (g)"
           hint="Peso total de filamento para todo o pedido."
         >
-          <input
+          <DecimalInput
             id="used-weight"
-            type="number"
-            inputMode="decimal"
             min={0}
-            step={0.1}
+            maxFractionDigits={1}
             value={usedWeight}
-            onChange={(e) =>
+            onChange={(next) =>
               onChange({
                 ...value,
-                filament: {
-                  ...value.filament,
-                  usedWeight: Math.max(0, parseNum(e.target.value)),
-                },
+                filament: { ...value.filament, usedWeight: next },
               })
             }
-            className={inputClassName}
           />
         </Field>
 

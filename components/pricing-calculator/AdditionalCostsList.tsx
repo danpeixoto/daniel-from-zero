@@ -1,15 +1,11 @@
 import type { AdditionalCost, PricingInput } from "@/lib/pricing";
 import { Field, inputClassName } from "./Field";
+import { DecimalInput } from "./NumericInput";
 
 type Props = {
   value: PricingInput;
   onChange: (next: PricingInput) => void;
 };
-
-function parseNum(raw: string): number {
-  const v = Number(raw.replace(",", "."));
-  return Number.isFinite(v) ? v : 0;
-}
 
 function updateCost(
   costs: AdditionalCost[],
@@ -47,10 +43,11 @@ export function AdditionalCostsList({ value, onChange }: Props) {
     <div className="flex flex-col gap-4">
       <div>
         <h3 className="font-[family-name:var(--font-display)] text-base font-semibold">
-          Custos adicionais
+          Outros custos
         </h3>
         <p className="mt-1 text-[0.8125rem] text-[var(--color-ink-muted)]">
-          Embalagem, correntes, hardware ou qualquer custo extra do pedido.
+          Correntes, ímãs, parafusos, cola, insertos ou qualquer extra além da
+          embalagem.
         </p>
       </div>
 
@@ -71,7 +68,7 @@ export function AdditionalCostsList({ value, onChange }: Props) {
                     id={nameId}
                     type="text"
                     value={item.name}
-                    placeholder="Ex.: embalagem"
+                    placeholder="Ex.: corrente de chaveiro"
                     onChange={(e) =>
                       setCosts(
                         updateCost(costs, item.id, { name: e.target.value }),
@@ -101,21 +98,14 @@ export function AdditionalCostsList({ value, onChange }: Props) {
                   </Field>
 
                   <Field id={valueId} label="Valor (R$)">
-                    <input
+                    <DecimalInput
                       id={valueId}
-                      type="number"
-                      inputMode="decimal"
                       min={0}
-                      step={0.01}
+                      maxFractionDigits={2}
                       value={item.value}
-                      onChange={(e) =>
-                        setCosts(
-                          updateCost(costs, item.id, {
-                            value: Math.max(0, parseNum(e.target.value)),
-                          }),
-                        )
+                      onChange={(next) =>
+                        setCosts(updateCost(costs, item.id, { value: next }))
                       }
-                      className={inputClassName}
                     />
                   </Field>
                 </div>

@@ -1,15 +1,11 @@
 import type { PricingInput } from "@/lib/pricing";
-import { Field, inputClassName } from "./Field";
+import { Field } from "./Field";
+import { DecimalInput } from "./NumericInput";
 
 type Props = {
   value: PricingInput;
   onChange: (next: PricingInput) => void;
 };
-
-function parseNum(raw: string): number {
-  const v = Number(raw.replace(",", "."));
-  return Number.isFinite(v) ? v : 0;
-}
 
 export function PrinterSection({ value, onChange }: Props) {
   return (
@@ -24,23 +20,17 @@ export function PrinterSection({ value, onChange }: Props) {
           hint="A maioria das impressoras FDM fica entre 100 e 150 W."
           tooltip="Potência média durante a impressão. Se não souber, use 120 W como ponto de partida."
         >
-          <input
+          <DecimalInput
             id="average-watts"
-            type="number"
-            inputMode="decimal"
             min={0}
-            step={1}
+            maxFractionDigits={1}
             value={value.printing.averageWatts}
-            onChange={(e) =>
+            onChange={(averageWatts) =>
               onChange({
                 ...value,
-                printing: {
-                  ...value.printing,
-                  averageWatts: Math.max(0, parseNum(e.target.value)),
-                },
+                printing: { ...value.printing, averageWatts },
               })
             }
-            className={inputClassName}
           />
         </Field>
 
@@ -50,23 +40,17 @@ export function PrinterSection({ value, onChange }: Props) {
           hint="Olhe na sua conta de luz o valor do kWh."
           tooltip="Preço que você paga por quilowatt-hora. Entra no cálculo do custo de energia da impressão."
         >
-          <input
+          <DecimalInput
             id="electricity-price"
-            type="number"
-            inputMode="decimal"
             min={0}
-            step={0.01}
+            maxFractionDigits={4}
             value={value.printing.electricityPrice}
-            onChange={(e) =>
+            onChange={(electricityPrice) =>
               onChange({
                 ...value,
-                printing: {
-                  ...value.printing,
-                  electricityPrice: Math.max(0, parseNum(e.target.value)),
-                },
+                printing: { ...value.printing, electricityPrice },
               })
             }
-            className={inputClassName}
           />
         </Field>
       </div>
