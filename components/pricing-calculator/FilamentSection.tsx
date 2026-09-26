@@ -48,6 +48,11 @@ export function FilamentSection({ value, onChange }: Props) {
           id="spool-weight"
           label="Peso do rolo (g)"
           hint="A maioria dos rolos vem com 1000 g."
+          error={
+            spoolWeight <= 0
+              ? "Informe o peso do rolo maior que zero."
+              : undefined
+          }
         >
           <input
             id="spool-weight"

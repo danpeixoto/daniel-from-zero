@@ -13,13 +13,15 @@ type FieldProps = {
 export function Field({ id, label, hint, tooltip, error, children }: FieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label
-        htmlFor={id}
-        className="text-[0.875rem] font-medium text-[var(--color-ink)]"
-      >
-        {label}
+      <div className="flex items-center gap-1">
+        <label
+          htmlFor={id}
+          className="text-[0.875rem] font-medium text-[var(--color-ink)]"
+        >
+          {label}
+        </label>
         {tooltip ? <HelpTooltip label={label}>{tooltip}</HelpTooltip> : null}
-      </label>
+      </div>
       {children}
       {hint ? (
         <p className="text-[0.8125rem] text-[var(--color-ink-muted)]">{hint}</p>

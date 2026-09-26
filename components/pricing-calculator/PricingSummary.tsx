@@ -30,6 +30,7 @@ export function PricingSummary({ input, result, onClear }: Props) {
   const [copied, setCopied] = useState(false);
   const { costs, pricing } = result;
   const quantity = Math.max(1, Math.floor(input.quantity) || 1);
+  const isValid = result.valid;
 
   const composition = [
     { label: "Material", value: costs.filament },
@@ -42,6 +43,7 @@ export function PricingSummary({ input, result, onClear }: Props) {
   const maxSlice = Math.max(...composition.map((c) => c.value), 0);
 
   async function handleCopy() {
+    if (!isValid) return;
     try {
       await navigator.clipboard.writeText(buildSummaryText(input, result));
       setCopied(true);
@@ -52,17 +54,23 @@ export function PricingSummary({ input, result, onClear }: Props) {
   }
 
   return (
-    <aside className="lg:sticky lg:top-24 lg:self-start">
+    <aside className="lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
       <div className="rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-5 sm:p-6">
         <p className="text-sm text-[var(--color-ink-muted)]">Preço recomendado</p>
         <p className="mt-1 font-[family-name:var(--font-mono)] text-[1.75rem] font-medium leading-tight tracking-tight text-[var(--color-accent)]">
-          {formatBRL(pricing.salePricePerUnit)}
-          <span className="text-base text-[var(--color-ink-muted)]">/un</span>
+          {isValid ? (
+            <>
+              {formatBRL(pricing.salePricePerUnit)}
+              <span className="text-base text-[var(--color-ink-muted)]">/un</span>
+            </>
+          ) : (
+            "—"
+          )}
         </p>
         <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
           Total do pedido:{" "}
           <span className="font-[family-name:var(--font-mono)] text-[var(--color-ink)]">
-            {formatBRL(pricing.salePriceTotal)}
+            {isValid ? formatBRL(pricing.salePriceTotal) : "—"}
           </span>{" "}
           ({quantity} {quantity === 1 ? "unidade" : "unidades"})
         </p>
@@ -93,7 +101,7 @@ export function PricingSummary({ input, result, onClear }: Props) {
               Preço recomendado
             </p>
             <p className="font-[family-name:var(--font-mono)] text-[var(--color-ink)]">
-              {formatBRL(pricing.salePricePerUnit)}/un
+              {isValid ? `${formatBRL(pricing.salePricePerUnit)}/un` : "—"}
             </p>
             <p className="text-[0.8125rem] text-[var(--color-ink-muted)]">
               Custos + taxas + margem
@@ -104,7 +112,7 @@ export function PricingSummary({ input, result, onClear }: Props) {
               Preço arredondado sugerido
             </p>
             <p className="font-[family-name:var(--font-mono)] text-[var(--color-ink)]">
-              {formatBRL(pricing.roundedPricePerUnit)}/un
+              {isValid ? `${formatBRL(pricing.roundedPricePerUnit)}/un` : "—"}
             </p>
             <p className="text-[0.8125rem] text-[var(--color-ink-muted)]">
               Arredondamento comercial para cima
@@ -202,7 +210,7 @@ export function PricingSummary({ input, result, onClear }: Props) {
               Faturamento
             </p>
             <p className="mt-0.5 font-[family-name:var(--font-mono)] text-sm tabular-nums">
-              {formatBRL(pricing.revenue)}
+              {isValid ? formatBRL(pricing.revenue) : "—"}
             </p>
           </div>
           <div>
@@ -210,7 +218,7 @@ export function PricingSummary({ input, result, onClear }: Props) {
               Lucro estimado
             </p>
             <p className="mt-0.5 font-[family-name:var(--font-mono)] text-sm tabular-nums">
-              {formatBRL(pricing.profitTotal)}
+              {isValid ? formatBRL(pricing.profitTotal) : "—"}
             </p>
           </div>
           <div>
@@ -218,7 +226,7 @@ export function PricingSummary({ input, result, onClear }: Props) {
               Margem efetiva
             </p>
             <p className="mt-0.5 font-[family-name:var(--font-mono)] text-sm tabular-nums">
-              {formatPercent(pricing.effectiveMargin * 100)}
+              {isValid ? formatPercent(pricing.effectiveMargin * 100) : "—"}
             </p>
           </div>
           <div>
@@ -230,13 +238,18 @@ export function PricingSummary({ input, result, onClear }: Props) {
               </HelpTooltip>
             </p>
             <p className="mt-0.5 font-[family-name:var(--font-mono)] text-sm tabular-nums">
-              {formatMarkup(pricing.markup)}
+              {isValid ? formatMarkup(pricing.markup) : "—"}
             </p>
           </div>
         </div>
 
         <div className="mt-6 flex flex-col gap-3 border-t border-[var(--color-border)] pt-6 sm:flex-row">
-          <Button type="button" onClick={handleCopy} className="sm:flex-1">
+          <Button
+            type="button"
+            onClick={handleCopy}
+            disabled={!isValid}
+            className="sm:flex-1 disabled:pointer-events-none disabled:opacity-50"
+          >
             {copied ? "Copiado" : "Copiar resumo"}
           </Button>
           <Button

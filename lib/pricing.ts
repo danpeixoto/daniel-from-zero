@@ -217,6 +217,13 @@ export function buildSummaryText(
   input: PricingInput,
   result: PricingResult,
 ): string {
+  if (!result.valid) {
+    return (
+      result.error ??
+      "Não foi possível calcular o preço de venda com os valores atuais."
+    );
+  }
+
   const q = Math.max(1, Math.floor(n(input.quantity) || 1));
   return [
     "Precificação da impressão 3D",
