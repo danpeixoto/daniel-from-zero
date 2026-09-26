@@ -113,7 +113,7 @@ export default function HomePage() {
           </Card>
           <Card
             href="/ferramentas"
-            tag="em breve"
+            tag="no ar"
             className="sm:col-span-2 lg:col-span-1"
           >
             <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold sm:text-xl">
@@ -121,7 +121,7 @@ export default function HomePage() {
             </h3>
             <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
               Utilitários gratuitos para mim e para quem acompanha. A primeira
-              será uma calculadora de preço de impressão 3D.
+              ferramenta — calculadora de preço de impressão 3D — já está no ar.
             </p>
           </Card>
         </div>

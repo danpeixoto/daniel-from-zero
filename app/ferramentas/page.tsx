@@ -7,14 +7,14 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Ferramentas",
   description:
-    "Ferramentas gratuitas do hub Daniel From Zero. Em breve: calculadora de preço de impressão 3D.",
+    "Ferramentas gratuitas do hub Daniel From Zero — começando pela calculadora de preço de impressão 3D.",
   alternates: {
     canonical: "/ferramentas",
   },
   openGraph: {
     title: `Ferramentas | ${siteConfig.name}`,
     description:
-      "Ferramentas gratuitas do hub. Em breve: calculadora de preço de impressão 3D.",
+      "Ferramentas gratuitas do hub — calculadora de preço de impressão 3D disponível.",
     url: "/ferramentas",
   },
 };
@@ -27,16 +27,17 @@ export default function FerramentasPage() {
       </h1>
       <p className="mt-3 max-w-xl text-base text-[var(--color-ink-muted)] sm:mt-4 sm:text-lg">
         Utilitários que eu uso no meu processo — e que ficam disponíveis para
-        quem acompanha o canal. A lista ainda está vazia.
+        quem acompanha o canal.
       </p>
 
       <div className="mt-8 w-full max-w-md sm:mt-10">
-        <Card tag="próxima">
+        <Card href="/ferramentas/calculadora-impressao-3d" tag="gratuita">
           <h2 className="font-[family-name:var(--font-display)] text-lg font-semibold sm:text-xl">
             Calculadora de preço de impressão 3D
           </h2>
           <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
-            Ainda não está pronta. Quando sair, o link aparece aqui.
+            Estima custo de filamento, energia e tempo — com margem que você
+            define. Abre a calculadora.
           </p>
         </Card>
       </div>
