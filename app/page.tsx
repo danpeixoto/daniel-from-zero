@@ -102,13 +102,13 @@ export default function HomePage() {
               Episódios e atualizações da jornada. Abre o canal em uma nova aba.
             </p>
           </Card>
-          <Card href="/blog" tag="em breve">
+          <Card href="/blog" tag="no ar">
             <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold sm:text-xl">
               Blog
             </h3>
             <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
               Textos sobre o que testei, o que não deu certo e o resultado até
-              agora.
+              agora — incluindo como precificar impressão 3D.
             </p>
           </Card>
           <Card

@@ -1,0 +1,573 @@
+---
+title: "Como Precificar Impressão 3D: Guia Completo para Saber Quanto Cobrar"
+headline: "Como precificar uma impressão 3D corretamente"
+description: "Aprenda como calcular o preço de uma impressão 3D considerando filamento, energia, tempo da máquina, mão de obra, perdas, taxas e margem de lucro."
+publishedAt: "2026-09-25"
+updatedAt: "2026-09-25"
+tags: ["impressão 3D", "precificação"]
+draft: false
+faq:
+  - question: "Quanto cobrar por grama em impressão 3D?"
+    answer: "Cobrar apenas por grama ignora energia, máquina, mão de obra, perdas e taxas. Pode servir como referência rápida de material, mas não é uma forma completa de precificar."
+  - question: "Como calcular o preço de uma impressão 3D?"
+    answer: "Some material, energia, custo da máquina, mão de obra e componentes. Acrescente uma reserva para perdas, considere impostos e taxas percentuais e só então aplique a margem desejada sobre o custo total."
+  - question: "Quanto cobrar por hora de impressão 3D?"
+    answer: "Não existe um valor universal. O custo por hora depende do preço da máquina, manutenção, peças de reposição e intensidade de uso. Comece com um valor simples e ajuste conforme o histórico real."
+  - question: "Qual margem usar em impressão 3D?"
+    answer: "Depende do nicho, concorrência, personalização, urgência, complexidade e percepção de valor. A margem é uma decisão de negócio, não uma constante matemática."
+  - question: "Filamento é o maior custo?"
+    answer: "Nem sempre. Em muitas peças, mão de obra e tempo de máquina pesam mais do que o plástico. O filamento é só uma parte do custo de produção."
+  - question: "Markup e margem são iguais?"
+    answer: "Não. Margem olha para o preço de venda (lucro dividido pelo preço). Markup compara o preço de venda com o custo. Por isso markup ou acréscimo sobre custo podem passar de 100%, enquanto margem não funciona dessa forma."
+---
+
+Quando alguém começa a vender peças impressas em 3D, é muito comum fazer uma conta simples: calcular quanto foi gasto de filamento, multiplicar por dois e usar isso como preço.
+
+O problema é que o filamento é apenas uma parte do custo.
+
+Uma impressão também ocupa a máquina por várias horas, consome energia, exige preparação, acabamento, montagem e ainda existe o risco de falhas e retrabalho.
+
+Se esses custos forem ignorados, é possível vender bastante e ainda assim ganhar muito pouco.
+
+Se você só quer chegar rapidamente a um preço, use a [calculadora de precificação de impressão 3D](/ferramentas/calculadora-impressao-3d).
+
+<CtaBox
+  description="Informe filamento, tempo, energia, mão de obra, taxas e margem desejada para chegar a um preço sugerido."
+  href="/ferramentas/calculadora-impressao-3d"
+  buttonLabel="Calcular preço da minha impressão"
+/>
+
+## Por que calcular apenas o filamento é errado?
+
+Este é um dos erros mais comuns de quem começa a vender impressão 3D.
+
+Imagine uma peça usando 50 g de um rolo de PLA de R$ 100 com 1 kg.
+
+<Formula code="R$ 100 / 1000 g = R$ 0,10 por grama
+
+50 g × R$ 0,10 = R$ 5,00" />
+
+Isso significa que o plástico utilizado custa aproximadamente R$ 5. Não significa que produzir a peça custa R$ 5.
+
+Além do filamento, entram:
+
+- energia;
+- desgaste da máquina;
+- manutenção;
+- tempo de impressão;
+- mão de obra;
+- acabamento;
+- componentes;
+- embalagem;
+- perdas;
+- impostos;
+- taxas;
+- lucro.
+
+<Callout>
+  <strong>Custo de filamento não é custo de produção.</strong>
+</Callout>
+
+## Quais custos entram em uma impressão 3D?
+
+Uma visão geral útil é esta:
+
+<Formula code="Custo de produção =
+material
++ energia
++ máquina
++ mão de obra
++ componentes
++ perdas" />
+
+Cada item abaixo mostra como calcular a própria parte. O preço final só faz sentido depois que todos entram na conta — ou, no mínimo, os que realmente existem no seu processo.
+
+## Como calcular o custo do filamento
+
+A fórmula base é simples:
+
+<Formula code="Custo por grama =
+preço do rolo / peso do rolo" />
+
+Depois:
+
+<Formula code="Custo de material =
+custo por grama × material utilizado" />
+
+Exemplo:
+
+<Formula code="Rolo: R$ 100
+Peso: 1000 g
+Uso: 250 g
+
+100 / 1000 = R$ 0,10/g
+
+250 × 0,10 = R$ 25" />
+
+O peso utilizado normalmente sai do slicer. Use o valor estimado da peça (e dos suportes, se forem desperdiçados) em vez de chutar.
+
+## Como calcular energia
+
+Energia deve ser considerada, mas normalmente não é o principal custo.
+
+Primeiro converta a potência:
+
+<Formula code="Potência em kW =
+Watts / 1000" />
+
+Depois:
+
+<Formula code="Custo de energia =
+potência em kW × horas × preço do kWh" />
+
+Exemplo:
+
+<Formula code="Impressora: 120 W
+Tempo: 20 horas
+Energia: R$ 1/kWh
+
+0,12 × 20 × 1
+
+= R$ 2,40" />
+
+<Callout>
+  Não use necessariamente a potência máxima da fonte da impressora. O ideal é trabalhar com o consumo médio.
+</Callout>
+
+## Como calcular o custo da impressora
+
+A máquina tem custo mesmo quando você não está trabalhando ativamente nela. Esse custo pode representar:
+
+- depreciação;
+- bicos;
+- correias;
+- rolamentos;
+- mesa;
+- manutenção;
+- peças de reposição;
+- desgaste geral.
+
+Uma forma prática é definir um **custo por hora de máquina**.
+
+Exemplo:
+
+<Formula code="Custo de máquina:
+R$ 1,50/h
+
+Impressão:
+20 horas
+
+20 × 1,50 = R$ 30" />
+
+Não existe um número universal. Quem ainda não possui histórico pode começar com um valor simples por hora e ajustar com o tempo conforme manutenção, preço da máquina e uso real.
+
+## Como calcular mão de obra
+
+<Callout>
+  <strong>Tempo da máquina e tempo de trabalho são coisas diferentes.</strong>
+</Callout>
+
+Exemplos de trabalho manual:
+
+- modelagem;
+- ajustes no arquivo;
+- slicer;
+- preparação;
+- troca de filamento;
+- remoção da mesa;
+- retirada de suportes;
+- lixamento;
+- pintura;
+- colagem;
+- montagem;
+- embalagem.
+
+Fórmula:
+
+<Formula code="Mão de obra =
+horas trabalhadas × valor da sua hora" />
+
+Exemplo:
+
+<Formula code="2 horas
+R$ 30/h
+
+2 × 30 = R$ 60" />
+
+Mesmo que a impressora trabalhe sozinha por dez horas, talvez você tenha trabalhado ativamente apenas uma hora. Esses dois custos devem ser tratados separadamente.
+
+## Custos adicionais
+
+Produtos impressos frequentemente possuem itens que não saem da impressora.
+
+Exemplos:
+
+- corrente de chaveiro;
+- argolas;
+- ímãs;
+- parafusos;
+- insertos;
+- fita;
+- cola;
+- embalagem;
+- etiquetas;
+- componentes eletrônicos;
+- tinta.
+
+Exemplo:
+
+<Formula code="Corrente:
+R$ 0,50 por unidade
+
+50 unidades:
+50 × 0,50 = R$ 25" />
+
+Se o item entra no produto entregue, ele entra no custo — mesmo que pareça “baratinho”.
+
+## Perdas e falhas
+
+Impressão 3D não tem aproveitamento perfeito. Pode ocorrer:
+
+- spaghetti;
+- warping;
+- peça soltar;
+- filamento quebrar;
+- falha de energia;
+- suporte;
+- purga;
+- testes;
+- protótipos;
+- retrabalho.
+
+Exemplo:
+
+<Formula code="Custo calculado:
+R$ 200
+
+Reserva para perdas:
+10%
+
+Custo ajustado:
+R$ 220" />
+
+O percentual depende da estabilidade do processo. Processo estável pode trabalhar com reserva menor; processo instável precisa de mais folga.
+
+## Impostos e taxas
+
+O preço final pode sofrer descontos depois da venda. Exemplos:
+
+- imposto;
+- taxa de marketplace;
+- comissão;
+- cartão;
+- gateway;
+- intermediador de pagamento.
+
+<Callout>
+  Uma venda de R$ 100 não significa necessariamente que R$ 100 entrarão no caixa da empresa.
+</Callout>
+
+Por isso taxas percentuais entram na fórmula do preço — não só no “depois eu vejo”.
+
+## Lucro, margem e markup
+
+Esta parte confunde bastante. Os três conceitos são relacionados, mas não são a mesma coisa.
+
+### Lucro
+
+É o dinheiro que sobra depois dos custos e despesas.
+
+<Formula code="Venda: R$ 100
+Custos: R$ 60
+
+Lucro:
+R$ 40" />
+
+### Margem
+
+Margem mostra quanto do preço de venda corresponde ao lucro.
+
+<Formula code="Margem =
+lucro / preço de venda" />
+
+Exemplo:
+
+<Formula code="40 / 100 = 40%" />
+
+Nesse caso, a margem é de 40%. Com custos positivos, a margem fica abaixo de 100%, porque o lucro é apenas uma parte do próprio preço de venda.
+
+### Markup
+
+Markup compara o preço de venda com o custo.
+
+<Formula code="Markup =
+preço de venda / custo" />
+
+Exemplo:
+
+<Formula code="Custo: R$ 20
+Venda: R$ 100
+
+Markup = 5x" />
+
+Também dá para falar do acréscimo sobre o custo:
+
+<Formula code="Lucro sobre custo:
+(100 - 20) / 20
+
+= 400%" />
+
+É por isso que markup ou acréscimo sobre custo pode passar de 100%, enquanto margem não funciona dessa forma.
+
+| Conceito | Exemplo |
+|---|---:|
+| Custo | R$ 20 |
+| Venda | R$ 100 |
+| Lucro | R$ 80 |
+| Margem | 80% |
+| Markup | 5x |
+| Acréscimo sobre custo | 400% |
+
+<Callout>
+  <strong>Margem olha para o preço de venda. Markup olha para o custo.</strong>
+</Callout>
+
+## Por que adicionar 40% ao custo não gera 40% de margem?
+
+Este é um dos erros mais caros — e um dos mais comuns.
+
+<Formula code="Custo:
+R$ 100" />
+
+Adicionar 40%:
+
+<Formula code="R$ 100 × 1,40
+= R$ 140" />
+
+Lucro:
+
+<Formula code="R$ 40" />
+
+Margem:
+
+<Formula code="40 / 140
+= 28,57%" />
+
+Portanto, colocar 40% sobre o custo gera um acréscimo de 40%, mas **não** uma margem de 40%.
+
+Para margem de 40%:
+
+<Formula code="Preço =
+custo / (1 - margem)" />
+
+<Formula code="100 / 0,60
+= R$ 166,67" />
+
+Lucro:
+
+<Formula code="R$ 66,67" />
+
+Margem:
+
+<Formula code="66,67 / 166,67
+= 40%" />
+
+Se a meta é margem sobre o preço de venda, use a fórmula com divisão — não multiplique o custo pelo percentual desejado.
+
+## Como calcular o preço final
+
+Sem taxas percentuais:
+
+<Formula code="Preço =
+custo total / (1 - margem desejada)" />
+
+Com taxas percentuais:
+
+<Formula code="Preço =
+custo total /
+(1 - margem - impostos - taxas)" />
+
+<Callout>
+  A soma da margem e das taxas percentuais precisa ser menor que 100%. Caso contrário, a fórmula quebra — e o preço deixa de fazer sentido.
+</Callout>
+
+## Exemplo completo: 50 chaveiros personalizados
+
+Produto: 50 chaveiros compostos por kettlebell impresso em 3D, moeda com logo, corrente e montagem.
+
+Custos do lote:
+
+<Formula code="Filamento: R$ 100
+Energia: R$ 4
+Máquina: R$ 45
+Mão de obra: R$ 60
+Correntes e outros materiais: R$ 25" />
+
+Subtotal:
+
+<Formula code="R$ 234" />
+
+Adicionar 10% de perda:
+
+<Formula code="234 × 1,10
+= R$ 257,40" />
+
+Custo por unidade:
+
+<Formula code="257,40 / 50
+= R$ 5,15" />
+
+Margem desejada de 40%:
+
+<Formula code="257,40 / (1 - 0,40)
+= R$ 429" />
+
+Preço unitário:
+
+<Formula code="429 / 50
+= R$ 8,58" />
+
+Resumo:
+
+| Item | Valor |
+|---|---:|
+| Custo do lote | R$ 257,40 |
+| Custo por unidade | R$ 5,15 |
+| Preço sugerido por unidade | R$ 8,58 |
+| Preço do pedido | R$ 429,00 |
+
+Esses valores são apenas um exemplo. Na prática, o preço depende dos custos reais, da complexidade, do acabamento e do mercado.
+
+## Não quer fazer essas contas manualmente?
+
+<CtaBox
+  description="Use a calculadora de precificação de impressão 3D. Informe filamento, tempo, energia, mão de obra, taxas e margem desejada para chegar automaticamente ao preço sugerido."
+  href="/ferramentas/calculadora-impressao-3d"
+  buttonLabel="Abrir calculadora de impressão 3D"
+/>
+
+## Como precificar pedidos grandes
+
+O preço unitário pode cair em lotes maiores porque alguns custos são fixos (ou quase fixos):
+
+- preparar arquivo;
+- configurar slicer;
+- atendimento;
+- modelagem;
+- setup inicial.
+
+Exemplo:
+
+<Formula code="1 unidade:
+todo o custo de setup fica em uma peça
+
+50 unidades:
+o mesmo custo pode ser diluído entre 50 peças" />
+
+<Callout>
+  Desconto por quantidade não deve ser automático. Ele só faz sentido quando o custo realmente diminui ou quando você conscientemente aceita uma margem menor.
+</Callout>
+
+## Qual margem usar?
+
+Não existe resposta única. Depende de:
+
+- nicho;
+- concorrência;
+- personalização;
+- urgência;
+- complexidade;
+- volume;
+- acabamento;
+- risco;
+- exclusividade;
+- percepção de valor.
+
+Uma peça simples e repetitiva pode trabalhar com uma margem diferente de uma peça personalizada, pintada e montada manualmente.
+
+<Callout>
+  <strong>A margem é uma decisão de negócio, não uma constante matemática.</strong>
+</Callout>
+
+## Como saber se o preço faz sentido?
+
+Precificação baseada em custo responde: “quanto preciso cobrar para essa venda valer a pena?”
+
+Mas existe outra pergunta: “quanto o mercado aceita pagar por esse produto?”
+
+O preço final também depende de:
+
+- mercado;
+- concorrência;
+- posicionamento;
+- valor percebido;
+- diferenciação.
+
+Se o mercado aceita pagar R$ 20 por algo que custa R$ 5 para produzir, não existe obrigação de vender por R$ 8 apenas porque o custo é baixo.
+
+Se o preço mínimo sustentável for maior do que o mercado aceita, pode ser necessário reduzir custos, melhorar produtividade ou repensar o produto.
+
+## Checklist de precificação
+
+Antes de definir seu preço, verifique:
+
+<Checklist title="Lista rápida">
+  <ChecklistItem>custo do filamento</ChecklistItem>
+  <ChecklistItem>consumo de energia</ChecklistItem>
+  <ChecklistItem>tempo da máquina</ChecklistItem>
+  <ChecklistItem>manutenção/depreciação</ChecklistItem>
+  <ChecklistItem>mão de obra</ChecklistItem>
+  <ChecklistItem>componentes adicionais</ChecklistItem>
+  <ChecklistItem>embalagem</ChecklistItem>
+  <ChecklistItem>desperdício</ChecklistItem>
+  <ChecklistItem>impostos</ChecklistItem>
+  <ChecklistItem>taxas</ChecklistItem>
+  <ChecklistItem>margem</ChecklistItem>
+  <ChecklistItem>preço de mercado</ChecklistItem>
+</Checklist>
+
+## Resumo
+
+Precificar impressão 3D corretamente significa olhar para o negócio inteiro, não apenas para o plástico utilizado.
+
+Comece calculando todos os custos, adicione uma reserva para perdas, considere taxas e impostos e só então aplique sua margem desejada.
+
+Depois, compare o resultado com o mercado.
+
+<Formula code="Custos
++ perdas
++ taxas
++ margem
+= preço sustentável" />
+
+<CtaBox
+  description="Monte o cenário com os seus números e veja o preço sugerido na hora."
+  href="/ferramentas/calculadora-impressao-3d"
+  buttonLabel="Calcular meu preço agora"
+/>
+
+## Perguntas frequentes
+
+### Quanto cobrar por grama em impressão 3D?
+
+Cobrar apenas por grama ignora energia, máquina, mão de obra, perdas e taxas. Pode servir como referência rápida de material, mas não é uma forma completa de precificar.
+
+### Como calcular o preço de uma impressão 3D?
+
+Some material, energia, custo da máquina, mão de obra e componentes. Acrescente uma reserva para perdas, considere impostos e taxas percentuais e só então aplique a margem desejada sobre o custo total.
+
+### Quanto cobrar por hora de impressão 3D?
+
+Não existe um valor universal. O custo por hora depende do preço da máquina, manutenção, peças de reposição e intensidade de uso. Comece com um valor simples e ajuste conforme o histórico real.
+
+### Qual margem usar em impressão 3D?
+
+Depende do nicho, da concorrência, da personalização e do risco. Teste cenários e escolha uma margem que cubra o negócio — não um percentual “padrão da internet”.
+
+### Filamento é o maior custo?
+
+Nem sempre. Em muitas peças, mão de obra e tempo de máquina pesam mais do que o plástico. O filamento é só uma parte do custo de produção.
+
+### Markup e margem são iguais?
+
+Não. Margem olha para o preço de venda. Markup olha para o custo. Por isso markup ou acréscimo sobre custo podem passar de 100%, enquanto margem não funciona dessa forma.

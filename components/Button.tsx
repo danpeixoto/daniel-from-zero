@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "outlineAccent";
 
 type CommonProps = {
   variant?: Variant;
@@ -28,6 +28,8 @@ const variants: Record<Variant, string> = {
     "bg-transparent text-[var(--color-ink)] border-[1.5px] border-[var(--color-border)] hover:border-[var(--color-accent)]",
   ghost:
     "bg-transparent text-[var(--color-accent)] hover:underline underline-offset-4",
+  outlineAccent:
+    "bg-transparent text-[var(--color-accent)] border-[1.5px] border-[var(--color-accent)] hover:border-[var(--color-accent-dark)] hover:text-[var(--color-accent-dark)] hover:-translate-y-0.5",
 };
 
 function cx(...parts: Array<string | undefined | false>) {

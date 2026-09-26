@@ -54,7 +54,8 @@ export function Navbar() {
 
         <div className="flex min-w-0 items-center gap-0.5 sm:gap-2 md:gap-4">
           {navItems.map((item) => {
-            const active = pathname === item.href;
+            const active =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
               <Link
                 key={item.href}
